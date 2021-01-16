@@ -1,0 +1,21 @@
+<h2>Buscar pelicula</h2>
+<form action="/peliculas" method="GET">
+  <div>
+    <label>Titulo</label>
+    <input type="text" name="name" value="<%= searchOptions.name %>">
+  </div>
+  <div>
+    <label>Estrenada despues de</label>
+    <input type="date" name="premieredAfter" value="<%= searchOptions.premieredAfter %>">
+  </div>
+  <div>
+    <label>Estrenada antes de</label>
+    <input type="date" name="premieredBefore" value="<%= searchOptions.premieredBefore %>">
+  </div>
+  <button type="submit">Buscar</button>
+</form>
+<div>
+  <% peliculas.forEach(pelicula => { %>
+    <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
+  <% }) %>
+</div>

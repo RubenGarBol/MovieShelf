@@ -1,0 +1,34 @@
+<div>
+    <label>Titulo</label>
+    <input type="text" name="name" value="<%= pelicula.name %>">
+  </div>
+  <div>
+    <label>Director</label>
+    <select name="director">
+    <% directores.forEach(director => { %>
+      <% if (director.id === pelicula.director) { %>
+        <option selected label="<%= director.name %>" value="<%= director.id %>">
+      <% } else { %>
+        <option label="<%= director.name %>" value="<%= director.id %>">
+      <% } %>
+    <% }) %>
+    </select>
+  </div>
+  <div>
+    <label>Fecha de estreno</label>
+    <input type="date" name="premierDate"
+          value="<%= pelicula.premierDate == null ? '' : pelicula.premierDate.toISOString().split('T')[0] %>">
+  </div>
+  <div>
+    <label>Duración (min)</label>
+    <input type="number" name="duration" min="1" value="<%= pelicula.duration %>">
+  </div>
+  </div>
+  <div>
+    <label>Portada</label>
+    <input type="file" name="cover">
+  </div>
+  <div>
+    <label>Synopsis</label>
+    <textarea name="synopsis"><%= pelicula.synopsis %></textarea>
+</div>

@@ -1,1 +1,6 @@
-Prueba
+<h2>Añadidas recientemente</h2>
+<div>
+  <% peliculas.forEach(pelicula => { %>
+    <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
+  <% }) %>
+</div>
