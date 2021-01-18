@@ -15,7 +15,9 @@
   <button type="submit">Buscar</button>
 </form>
 <div>
-  <% peliculas.forEach(pelicula => { %>
+  <% peliculas.forEach(pelicula => { %>   
+    <a href="/peliculas/<%= pelicula.id %>">
     <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
+    </a>
   <% }) %>
 </div>

@@ -1,18 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const multer = require('multer')
-const path = require('path')
-const fs = require('fs')
 const Pelicula = require('../models/pelicula')
 const Director = require('../models/director')
-const uploadPath = path.join('public', Pelicula.coverBasePath)
+const director = require('../models/director')
+const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
+/*
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 const upload = multer({
   dest: uploadPath,
   fileFilter: (req, file, callback) => {
     callback(null, imageMimeTypes.includes(file.mimetype))
   }
-})
+})*/
 
 //Ruta para todas las peliculas
 router.get('/', async (req, res) => {
@@ -37,13 +36,13 @@ router.get('/', async (req, res) => {
   }
 })
 
-//Ruta para crear una nueva pelicua
+//Ruta para crear una nueva pelicula
 router.get('/nueva', async (req, res) => {
   renderNewPage(res, new Pelicula())
 })
 
 // Crear una ruta para cada pelicula
-router.post('/', upload.single('cover'), async (req, res) => {
+router.post('/', async (req, res) => {
   const fileName = req.file != null ? req.file.filename : null
   const pelicula = new Pelicula({
     name: req.body.name,
@@ -53,6 +52,7 @@ router.post('/', upload.single('cover'), async (req, res) => {
     coverImageName: fileName,
     synopsis: req.body.synopsis
   })
+  saveCover(pelicula, req.body.cover)
 
   try {
     const newPelicula = await pelicula.save()
@@ -64,6 +64,73 @@ router.post('/', upload.single('cover'), async (req, res) => {
     renderNewPage(res, pelicula, true)
   }
 })
+
+//Ruta para mostrar cada pelicula
+router.get('/:id', async (req, res) => {
+  try {
+    const pelicula = await Pelicula.findById(req.params.id).populate('director').exec()
+    res.render('peliculas/mostrar', { 
+      pelicula: pelicula,
+    })
+  } catch {
+    res.redirect('/')
+  }
+})
+
+//Ruta para editar cada pelicula
+router.get('/:id/editar', async (req, res) => {
+  try {
+    const pelicula = await Pelicula.findById(req.params.id)
+    renderEditPage(res, pelicula)
+  } catch {
+    res.redirect('/')
+  }
+})
+
+//Ruta para actualizar las peliculas
+router.put('/:id', async (req, res) => {
+  let pelicula
+  try {
+    pelicula = await Pelicula.findById(req.params.id)
+    pelicula.name = req.body.name
+    pelicula.director = req.body.director
+    pelicula.premierDate = new Date(req.body.premierDate)
+    pelicula.duration = req.body.duration
+    pelicula.synopsis = req.body.synopsis
+    if (req.body.cover != null && req.body.cover !== '') {
+      saveCover(pelicula, req.body.cover)
+    }
+    await pelicula.save()
+    res.redirect(`/peliculas/${pelicula.id}`)
+  } catch {
+    if (pelicula != null) {
+      renderEditPage(res, pelicula, true)
+    } else {
+      redirect('/')
+    }
+  }
+})
+
+//Ruta para borrar cada pelicula
+router.delete('/:id', async (req, res) => {
+  let pelicula
+  try {
+    pelicula = await Pelicula.findById(req.params.id)
+    await pelicula.remove()
+    res.redirect('/peliculas')
+  } catch {
+    if (pelicula != null) {
+      res.render('peliculas/mostrar', {
+        pelicula: pelicula,
+        errorMsg: 'No se pudo borrar la pelicula'
+      })
+    } else {
+      res.redirect('/')
+    }
+  }
+})
+
+
 
 function removeCover(fileName) {
   fs.unlink(path.join(uploadPath, fileName), err => {
@@ -82,6 +149,15 @@ async function renderNewPage(res, pelicula, hasError = false) {
     res.render('peliculas/nueva', params)
   } catch {
     res.redirect('/peliculas')
+  }
+}
+
+function saveCover(pelicula, coverEncoded) {
+  if (coverEncoded == null) return
+  const cover = JSON.parse(coverEncoded)
+  if (cover != null && imageMimeTypes.includes(cover.type)) {
+    pelicula.coverImage = new Buffer.from(cover.data, 'base64')
+    pelicula.coverImageType = cover.type
   }
 }
 

@@ -1,0 +1,6 @@
+<h2>Editar Director</h2>
+<form action="/directores/<%= director.id %>?_method=PUT" method="POST">
+  <%- include('form') %> 
+  <button type="submit">Actualizar</button>
+  <a href="/directores/<%= director.id %>">Volver</a>
+</form>
