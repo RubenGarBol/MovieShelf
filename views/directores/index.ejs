@@ -1,1 +1,14 @@
-TODOS LOS DIRECTORES
+<h2>Buscar Directores</h2>
+<form action="/directores" method="GET">
+  <label>Nombre</label>
+  <input type="text" name="name" value="<%= searchOptions.name %>">
+  <button type="submit">Buscar</button>
+</form>
+<br>
+<% directores.forEach(director => { %>
+  <div><%= director.name %></div>
+  <a href="/directores/<%= director.id %>">Ver</a>
+  <a href="/directores/<%= director.id %>/editar">Editar</a>
+  <%- include('../frag/delete',
+              { url: `/directores/${director.id}` }) %>
+<% }) %>

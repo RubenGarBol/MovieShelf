@@ -1,0 +1,15 @@
+<h2><%= pelicula.name %></h2>
+<img width="100" height="150" src="<%= pelicula.coverImagePath %>">
+<div>
+  <b>Director:</b>
+  <a href="/directores/<%= pelicula.director.id %>">
+     <%= pelicula.director.name %>
+  </a>
+</div>
+<div><b>Fecha de Estreno:</b> <%= pelicula.premierDate.toDateString() %></div>
+<div><b>Duracion:</b> <%= pelicula.duration %></div>
+<div><b>Synopsis:</b> <%= pelicula.synopsis %></div>
+
+<a href="/peliculas/<%= pelicula.id %>/editar">Editar</a>
+<a href="/directores/<%= pelicula.director.id %>">Ver director</a>
+<%- include('../frag/delete', { url: `/peliculas/${pelicula.id}` }) %>

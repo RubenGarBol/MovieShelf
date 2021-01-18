@@ -1,0 +1,12 @@
+<h2><%= director.name %></h2>
+<a href="/directores/<%= director.id %>/editar">Editar</a>
+<%- include('../frag/delete',
+            { url: `/directores/${director.id}` }) %>
+<% if (peliculasDirigidas.length > 0) { %>
+  <h2>Peliculas dirigidas</h2>
+  <% peliculasDirigidas.forEach(pelicula => { %>
+    <a href="/peliculas/<%= pelicula.id %>">
+      <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
+    </a>
+  <% }) %>
+<% } %>
