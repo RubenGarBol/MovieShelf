@@ -15,9 +15,14 @@
   <button type="submit">Buscar</button>
 </form>
 <div>
+<<<<<<< Updated upstream
   <% peliculas.forEach(pelicula => { %>   
     <a href="/peliculas/<%= pelicula.id %>">
     <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
     </a>
+=======
+  <% peliculas.forEach(pelicula => { %>
+    <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
+>>>>>>> Stashed changes
   <% }) %>
 </div>

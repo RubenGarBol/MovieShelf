@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Director = require('../models/director')
+<<<<<<< Updated upstream
 const Pelicula = require('../models/pelicula')
+=======
+>>>>>>> Stashed changes
 
 //Todos los directores
 router.get('/', async (req, res) => {
@@ -26,7 +29,11 @@ router.get('/nuevo', (req, res) => {
   res.render('directores/nuevo', { director: new Director() })
 })
 
+<<<<<<< Updated upstream
 //Crear ruta para nuevo director 
+=======
+//Ruta director creado
+>>>>>>> Stashed changes
 router.post('/', async (req, res) => {
   const director = new Director({
     name: req.body.name
@@ -48,10 +55,15 @@ router.post('/', async (req, res) => {
         errorMsg: 'Error al crear el director'
       })
     }else {
+<<<<<<< Updated upstream
+=======
+      //res.redirect(`director/${newDirector.id}`)
+>>>>>>> Stashed changes
       res.redirect(`directores`)
     }
     })*/
   //res.send(req.body.name)
+<<<<<<< Updated upstream
 })
 
 router.get('/:id', async (req, res) =>{
@@ -113,6 +125,8 @@ router.delete('/:id', async (req, res) =>{
     }
   }
   //res.send('Borrar Director ' + req.params.id)
+=======
+>>>>>>> Stashed changes
 })
 
 module.exports = router

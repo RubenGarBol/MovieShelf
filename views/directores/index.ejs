@@ -7,8 +7,12 @@
 <br>
 <% directores.forEach(director => { %>
   <div><%= director.name %></div>
+<<<<<<< Updated upstream
   <a href="/directores/<%= director.id %>">Ver</a>
   <a href="/directores/<%= director.id %>/editar">Editar</a>
   <%- include('../frag/delete',
               { url: `/directores/${director.id}` }) %>
 <% }) %>
+=======
+<% }) %>
+>>>>>>> Stashed changes

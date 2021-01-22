@@ -1,17 +1,30 @@
 const express = require('express')
 const router = express.Router()
+<<<<<<< Updated upstream
 const Pelicula = require('../models/pelicula')
 const Director = require('../models/director')
 const director = require('../models/director')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 /*
+=======
+const multer = require('multer')
+const path = require('path')
+const fs = require('fs')
+const Pelicula = require('../models/pelicula')
+const Director = require('../models/director')
+const uploadPath = path.join('public', Pelicula.coverBasePath)
+>>>>>>> Stashed changes
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 const upload = multer({
   dest: uploadPath,
   fileFilter: (req, file, callback) => {
     callback(null, imageMimeTypes.includes(file.mimetype))
   }
+<<<<<<< Updated upstream
 })*/
+=======
+})
+>>>>>>> Stashed changes
 
 //Ruta para todas las peliculas
 router.get('/', async (req, res) => {
@@ -36,13 +49,21 @@ router.get('/', async (req, res) => {
   }
 })
 
+<<<<<<< Updated upstream
 //Ruta para crear una nueva pelicula
+=======
+//Ruta para crear una nueva pelicua
+>>>>>>> Stashed changes
 router.get('/nueva', async (req, res) => {
   renderNewPage(res, new Pelicula())
 })
 
 // Crear una ruta para cada pelicula
+<<<<<<< Updated upstream
 router.post('/', async (req, res) => {
+=======
+router.post('/', upload.single('cover'), async (req, res) => {
+>>>>>>> Stashed changes
   const fileName = req.file != null ? req.file.filename : null
   const pelicula = new Pelicula({
     name: req.body.name,
@@ -52,7 +73,10 @@ router.post('/', async (req, res) => {
     coverImageName: fileName,
     synopsis: req.body.synopsis
   })
+<<<<<<< Updated upstream
   saveCover(pelicula, req.body.cover)
+=======
+>>>>>>> Stashed changes
 
   try {
     const newPelicula = await pelicula.save()
@@ -65,6 +89,7 @@ router.post('/', async (req, res) => {
   }
 })
 
+<<<<<<< Updated upstream
 //Ruta para mostrar cada pelicula
 router.get('/:id', async (req, res) => {
   try {
@@ -132,6 +157,8 @@ router.delete('/:id', async (req, res) => {
 
 
 
+=======
+>>>>>>> Stashed changes
 function removeCover(fileName) {
   fs.unlink(path.join(uploadPath, fileName), err => {
     if (err) console.error(err)
@@ -152,6 +179,7 @@ async function renderNewPage(res, pelicula, hasError = false) {
   }
 }
 
+<<<<<<< Updated upstream
 function saveCover(pelicula, coverEncoded) {
   if (coverEncoded == null) return
   const cover = JSON.parse(coverEncoded)
@@ -161,4 +189,6 @@ function saveCover(pelicula, coverEncoded) {
   }
 }
 
+=======
+>>>>>>> Stashed changes
 module.exports = router
