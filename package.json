@@ -15,8 +15,13 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-ejs-layouts": "^2.5.0",
+<<<<<<< Updated upstream
     "method-override": "^3.0.0",
     "mongoose": "^5.4.18"
+=======
+    "mongoose": "^5.4.18",
+    "multer": "^1.4.2"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "dotenv": "^6.2.0",

@@ -1,3 +1,4 @@
+
 <h2>AÑADIDAS RECIENTEMENTE</h2>
 <br>
 <div class="form-group row">
@@ -10,5 +11,11 @@
         </a>
       </figure>
     <div>
+<h2>Añadidas recientemente</h2>
+<div>
+  <% peliculas.forEach(pelicula => { %>
+    <a href="/peliculas/<%= pelicula.id %>">
+      <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
+    </a>
   <% }) %>
 </div>
