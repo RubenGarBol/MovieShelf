@@ -52,12 +52,16 @@ router.post('/', async (req, res) => {
     coverImageName: fileName,
     synopsis: req.body.synopsis
   })
-  saveCover(pelicula, req.body.cover)
-
+  
+  if (req.body.cover != null && req.body.cover !== '') {
+    saveCover(pelicula, req.body.cover)
+  }
+  
   try {
     const newPelicula = await pelicula.save()
     res.redirect(`peliculas`)
-  } catch {
+  } catch (err){
+    console.log(err)
     if (pelicula.coverImageName != null) {
       removeCover(pelicula.coverImageName)
     }
@@ -98,6 +102,7 @@ router.put('/:id', async (req, res) => {
     pelicula.premierDate = new Date(req.body.premierDate)
     pelicula.duration = req.body.duration
     pelicula.synopsis = req.body.synopsis
+
     if (req.body.cover != null && req.body.cover !== '') {
       saveCover(pelicula, req.body.cover)
     }
@@ -163,7 +168,6 @@ async function renderEditPage(res, pelicula, hasError = false) {
     }
     res.render(`peliculas/editar`, params)
   } catch (err) {
-    console.log(err)
     res.redirect('/peliculas')
   }
 }

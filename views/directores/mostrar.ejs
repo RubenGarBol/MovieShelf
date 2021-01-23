@@ -10,14 +10,19 @@
 </div>
 <br>
 <% if (peliculasDirigidas.length > 0) { %>
-  <h2>Peliculas dirigidas</h2>
-  <div class="form-group row">
-    <% peliculasDirigidas.forEach(pelicula => { %>
-      <div class="form-group col-md-4">
-        <a href="/peliculas/<%= pelicula.id %>">
-          <img class="img-fluid" src="<%= pelicula.coverImagePath %>">
-        </a>
-      </div>   
+<h2>Peliculas dirigidas</h2>
+<div class="row" style="margin-top: -50px;">
+  <% peliculasDirigidas.forEach(pelicula => { %>      
+    <div class="col-md-4" style="width: 200px; height: 300px; object-fit: cover; margin-top: 50px;" >
+        <figure>
+          <a href="/peliculas/<%= pelicula.id %>">
+            <img class="img-fluid" style="width: 200px; height: 300px; object-fit: cover;"  src="<%= pelicula.coverImagePath %>">
+            <div class="row" style="width: 200px; height: 300px; object-fit: cover; text-align: center;" >
+              <figcaption style="text-align: center;"><h5><%= pelicula.name %></h5></figcaption>
+            </div>
+          </a>
+        </figure>
+      </div>
     <% }) %>
   </div>
 <% } %>
