@@ -1,6 +1,6 @@
-<h2>Editar Pelicula</h2>
+<h2>EDITAR PELICULA</h2>
 <form action="/peliculas/<%= pelicula.id %>?_method=PUT" method="POST">
   <%- include('form') %>
-  <button type="submit">Actualizar</button>
-  <a href="/peliculas">Volver</a>
+  <button class="btn btn-primary" type="submit" style="margin: 20px;">Actualizar</button>
+  <a class="btn btn-danger" href="/peliculas">Volver</a>
 </form>

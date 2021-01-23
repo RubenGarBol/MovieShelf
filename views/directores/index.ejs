@@ -1,14 +1,33 @@
-<h2>Buscar Directores</h2>
+<h2>BUSCAR DIRECTORES</h2>
 <form action="/directores" method="GET">
-  <label>Nombre</label>
-  <input type="text" name="name" value="<%= searchOptions.name %>">
-  <button type="submit">Buscar</button>
+  <div class="form-group row">
+    <div class="form-group col">
+      <label>Nombre</label>
+      <input type="text" class="form-control" name="name" value="<%= searchOptions.name %>">
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit" style="margin: 20px;">Buscar</button>
 </form>
 <br>
-<% directores.forEach(director => { %>
-  <div><%= director.name %></div>
-  <a href="/directores/<%= director.id %>">Ver</a>
-  <a href="/directores/<%= director.id %>/editar">Editar</a>
-  <%- include('../frag/delete',
-              { url: `/directores/${director.id}` }) %>
-<% }) %>
+<div class="row text-center">
+  <% directores.forEach(director => { %>
+    <div class="col-md-2 border rounded border-secondary" style="margin: 10px;">
+      <div class="text-center" style="padding: 20px;"><h5><%= director.name %></h5></div>
+      
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <a class="btn btn-primary" href="/directores/<%= director.id %>">Ver</a>
+        </div>
+        <div class="col-md-auto">
+          <a class="btn btn-info" href="/directores/<%= director.id %>/editar">Editar</a>
+        </div>
+        <div class="col-md-auto" style="padding: 20px;">
+          <%- include('../frag/delete',
+          { url: `/directores/${director.id}` }) %>
+        </div>
+      </div>
+     
+        
+    </div>        
+  <% }) %>
+</div>

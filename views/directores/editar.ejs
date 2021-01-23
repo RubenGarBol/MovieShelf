@@ -1,6 +1,8 @@
-<h2>Editar Director</h2>
+<h2 class="page-header">Editar Director</h2>
 <form action="/directores/<%= director.id %>?_method=PUT" method="POST">
-  <%- include('form') %> 
-  <button type="submit">Actualizar</button>
-  <a href="/directores/<%= director.id %>">Volver</a>
+  <%- include('form') %>
+  <div class="form-row form-row-end btn-row">
+  <button class="btn btn-primary" type="submit" style="margin: 20px;">Actualizar</button>
+  <a class="btn btn-danger" href="/directores/<%= director.id %>">Volver</a>
+  </div>
 </form>

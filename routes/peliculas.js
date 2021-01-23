@@ -82,7 +82,8 @@ router.get('/:id/editar', async (req, res) => {
   try {
     const pelicula = await Pelicula.findById(req.params.id)
     renderEditPage(res, pelicula)
-  } catch {
+  } catch(err) {
+    console.log(err)
     res.redirect('/')
   }
 })
@@ -130,8 +131,6 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
-
-
 function removeCover(fileName) {
   fs.unlink(path.join(uploadPath, fileName), err => {
     if (err) console.error(err)
@@ -145,12 +144,30 @@ async function renderNewPage(res, pelicula, hasError = false) {
       directores: directores,
       pelicula: pelicula
     }
-    if (hasError) params.errorMessage = 'Error al crear la pelicula'
+    if (hasError) params.errorMsg = 'Error al crear la pelicula'
     res.render('peliculas/nueva', params)
   } catch {
     res.redirect('/peliculas')
   }
 }
+
+async function renderEditPage(res, pelicula, hasError = false) {
+  try {
+    const directores = await Director.find({})
+    const params = {
+      directores: directores,
+      pelicula: pelicula
+    }
+    if (hasError) {
+        params.errorMsg = 'Error al editar el libro'
+    }
+    res.render(`peliculas/editar`, params)
+  } catch (err) {
+    console.log(err)
+    res.redirect('/peliculas')
+  }
+}
+
 
 function saveCover(pelicula, coverEncoded) {
   if (coverEncoded == null) return

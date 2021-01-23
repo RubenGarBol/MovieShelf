@@ -1,8 +1,14 @@
-<h2>Añadidas recientemente</h2>
-<div>
-  <% peliculas.forEach(pelicula => { %>
-    <a href="/peliculas/<%= pelicula.id %>">
-      <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
-    </a>
+<h2>AÑADIDAS RECIENTEMENTE</h2>
+<br>
+<div class="form-group row">
+  <% peliculas.forEach(pelicula => { %>      
+    <div class="form-group col-md-4">
+      <figure>
+        <a href="/peliculas/<%= pelicula.id %>">
+          <img class="img-fluid" src="<%= pelicula.coverImagePath %>">
+          <figcaption style="text-align: center;"><h5><%= pelicula.name %></h5></figcaption>
+        </a>
+      </figure>
+    <div>
   <% }) %>
 </div>

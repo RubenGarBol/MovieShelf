@@ -1,15 +1,38 @@
 <h2><%= pelicula.name %></h2>
-<img width="100" height="150" src="<%= pelicula.coverImagePath %>">
-<div>
-  <b>Director:</b>
-  <a href="/directores/<%= pelicula.director.id %>">
-     <%= pelicula.director.name %>
-  </a>
-</div>
-<div><b>Fecha de Estreno:</b> <%= pelicula.premierDate.toDateString() %></div>
-<div><b>Duracion:</b> <%= pelicula.duration %></div>
-<div><b>Synopsis:</b> <%= pelicula.synopsis %></div>
+<img class="img-fluid" style="max-width: 300px;" src="<%= pelicula.coverImagePath %>">
 
-<a href="/peliculas/<%= pelicula.id %>/editar">Editar</a>
-<a href="/directores/<%= pelicula.director.id %>">Ver director</a>
-<%- include('../frag/delete', { url: `/peliculas/${pelicula.id}` }) %>
+<div class="row" style="padding: 20px;">
+  <div class="col-md-4">
+    <h4>Director:</h4>
+    <h5><a class="btn btn-outline-primary" href="/directores/<%= pelicula.director.id %>">
+       <%= pelicula.director.name %>
+    </a></h5>
+  </div>
+  <div class="col-md-4">
+    <h4>Duracion:</h4>
+    <h5><%= pelicula.duration %> minutos</h5>
+  </div>
+  <div class="col-md-4">
+    <h4>Fecha de Estreno:</h4>
+    <h5><%= pelicula.premierDate.toDateString() %> </h5>
+  </div>
+</div>
+
+<div class="d-flex flex-row" style="  text-align: justify; text-justify: inter-word;">
+  <div class="p-2">
+  <b>Synopsis:</b>
+  <%= pelicula.synopsis %>
+</div>
+</div>
+
+<div class="d-flex flex-row">
+  <div class="p-2">
+    <a class="btn btn-primary" href="/peliculas/<%= pelicula.id %>/editar">Editar</a>
+  </div>
+  <div class="p-2">
+    <a class="btn btn-info" href="/directores/<%= pelicula.director.id %>">Ver director</a>
+  </div>
+  <div class="p-2">
+    <%- include('../frag/delete', { url: `/peliculas/${pelicula.id}` }) %>
+  </div>
+</div>

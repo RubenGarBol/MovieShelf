@@ -1,34 +1,39 @@
-<div>
+<div class="form-group row">
+  <div class="form-group col-md-6">
     <label>Titulo</label>
-    <input type="text" name="name" value="<%= pelicula.name %>">
+    <input type="text" class="form-control" name="name" value="<%= pelicula.name %>">
   </div>
-  <div>
+  <div class="form-group col-md-6">
     <label>Director</label>
-    <select name="director">
-    <% directores.forEach(director => { %>
-      <% if (director.id === pelicula.director) { %>
-        <option selected label="<%= director.name %>" value="<%= director.id %>">
-      <% } else { %>
-        <option label="<%= director.name %>" value="<%= director.id %>">
-      <% } %>
-    <% }) %>
+    <select class="form-control" name="director">
+      <% directores.forEach(director => { %>
+        <% if (director.id === pelicula.director) { %>
+          <option selected label="<%= director.name %>" value="<%= director.id %>">
+        <% } else { %>
+          <option label="<%= director.name %>" value="<%= director.id %>">
+        <% } %>
+      <% }) %>
     </select>
   </div>
-  <div>
-    <label>Fecha de estreno</label>
-    <input type="date" name="premierDate"
-          value="<%= pelicula.premierDate == null ? '' : pelicula.premierDate.toISOString().split('T')[0] %>">
-  </div>
-  <div>
-    <label>Duración (min)</label>
-    <input type="number" name="duration" min="1" value="<%= pelicula.duration %>">
-  </div>
-  </div>
-  <div>
+</div>
+<div class="form-group row">
+  <div class="form-group col-md-6">
+      <label>Fecha de estreno</label>
+      <input type="date" class="form-control"  name="premierDate"
+            value="<%= pelicula.premierDate == null ? '' : pelicula.premierDate.toISOString().split('T')[0] %>">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Duración (min)</label>
+      <input type="number" class="form-control" name="duration" min="1" value="<%= pelicula.duration %>">
+    </div>
+</div>
+<div class="form-group row">
+  <div class="form-group col-md-2">
     <label>Portada</label>
     <input type="file" name="cover" class="filepond">
   </div>
-  <div>
+  <div class="form-group col">
     <label>Synopsis</label>
-    <textarea name="synopsis"><%= pelicula.synopsis %></textarea>
+    <textarea class="form-control" name="synopsis" style="height: 91%;"><%= pelicula.synopsis %></textarea>
+  </div>
 </div>

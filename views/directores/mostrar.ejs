@@ -1,12 +1,23 @@
 <h2><%= director.name %></h2>
-<a href="/directores/<%= director.id %>/editar">Editar</a>
-<%- include('../frag/delete',
+<div class="d-flex flex-row">
+  <div class="p-2">
+    <a class="btn btn-primary" href="/directores/<%= director.id %>/editar">Editar</a>
+  </div>
+  <div class="p-2">
+    <%- include('../frag/delete',
             { url: `/directores/${director.id}` }) %>
+  </div>
+</div>
+<br>
 <% if (peliculasDirigidas.length > 0) { %>
   <h2>Peliculas dirigidas</h2>
-  <% peliculasDirigidas.forEach(pelicula => { %>
-    <a href="/peliculas/<%= pelicula.id %>">
-      <img height="150" width="100" src="<%= pelicula.coverImagePath %>">
-    </a>
-  <% }) %>
+  <div class="form-group row">
+    <% peliculasDirigidas.forEach(pelicula => { %>
+      <div class="form-group col-md-4">
+        <a href="/peliculas/<%= pelicula.id %>">
+          <img class="img-fluid" src="<%= pelicula.coverImagePath %>">
+        </a>
+      </div>   
+    <% }) %>
+  </div>
 <% } %>

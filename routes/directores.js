@@ -100,8 +100,14 @@ router.put('/:id', async (req, res) =>{
 
 router.delete('/:id', async (req, res) =>{
   let director
+  let searchOptions = {}
+  const directores = await Director.find(searchOptions)
+  if (req.query.name != null && req.query.name !== '') {
+    searchOptions.name = new RegExp(req.query.name, 'i')
+  }
   try {
     director = await Director.findById(req.params.id)
+    
     await director.remove()
     res.redirect('/directores')
   } catch (err) {
@@ -109,7 +115,11 @@ router.delete('/:id', async (req, res) =>{
     if (director == null) {
       res.redirect('/')
     } else {
-      res.redirect(`/directores/${director.id}`)
+      res.render('directores/index', {
+        directores: directores,
+        searchOptions: req.query,
+        errorMsg: 'Error, el director tiene peliculas asignadas'
+      })
     }
   }
   //res.send('Borrar Director ' + req.params.id)
