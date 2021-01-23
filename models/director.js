@@ -1,8 +1,5 @@
 const mongoose = require('mongoose')
-<<<<<<< Updated upstream
 const Pelicula = require('./pelicula')
-=======
->>>>>>> Stashed changes
 
 //"Tabla" director
 const directorSchema = new mongoose.Schema({
@@ -12,7 +9,6 @@ const directorSchema = new mongoose.Schema({
     }
 })
 
-<<<<<<< Updated upstream
 directorSchema.pre('remove', function(next) {
     Pelicula.find({ director: this.id }, (err, peliculas) => {
       if (err) {
@@ -25,7 +21,5 @@ directorSchema.pre('remove', function(next) {
     })
   })
 
-=======
->>>>>>> Stashed changes
 //Nombre de la tabla y definicion de la misma
 module.exports = mongoose.model('Director', directorSchema)

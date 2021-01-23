@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Pelicula = require('../models/pelicula')
 const Director = require('../models/director')
+const director = require('../models/director')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 /*
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
@@ -63,7 +64,6 @@ router.post('/', async (req, res) => {
     renderNewPage(res, pelicula, true)
   }
 })
-
 
 //Ruta para mostrar cada pelicula
 router.get('/:id', async (req, res) => {
@@ -167,6 +167,7 @@ async function renderEditPage(res, pelicula, hasError = false) {
     res.redirect('/peliculas')
   }
 }
+
 
 function saveCover(pelicula, coverEncoded) {
   if (coverEncoded == null) return

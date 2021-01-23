@@ -9,7 +9,6 @@
   <button class="btn btn-primary" type="submit" style="margin: 20px;">Buscar</button>
 </form>
 <br>
-
 <div class="row text-center">
   <% directores.forEach(director => { %>
     <div class="col-md-2 border rounded border-secondary" style="margin: 10px;">
@@ -32,12 +31,3 @@
     </div>        
   <% }) %>
 </div>
-
-<% directores.forEach(director => { %>
-  <div><%= director.name %></div>
-  <a href="/directores/<%= director.id %>">Ver</a>
-  <a href="/directores/<%= director.id %>/editar">Editar</a>
-  <%- include('../frag/delete',
-              { url: `/directores/${director.id}` }) %>
-<% }) %>
-
